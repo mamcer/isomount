@@ -20,7 +20,6 @@ One day I decided to review all my private repositories in bitbucket and also vi
 
 All of them are trying to solve a particular problem. But in most cases the real reason behind, that justifies the creation and hours burnt in the project was to learn something new, test a service or just code for fun.
 
-In this case is a front end and wrapper of Slysoft virtual clone drive. To make it easier to mount and unmount iso files in an era were this functionality wasn't built on Windows (7-)
+In this case is a front end and wrapper of Slysoft virtual clone drive. To make it easier to mount and unmount iso files in an era where this functionality wasn't included in Windows (7-)
 
-I started this project locally back in 2010 (maybe with mercurial), later include it in visualstudio online (2013) and after that in bitbucket (2014). I have to say that the base code almost didn't change  since the first version.
-
+I started this project locally in 2010 (maybe with mercurial), later I included it in visualstudio online (2013) and after that in bitbucket (2014). I have to say that the base code almost didn't change  since the first version.
