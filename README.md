@@ -1,6 +1,6 @@
 # IsoMount
 
-A simple wrapper to Virtual Clone Drive [http://www.slysoft.com/es/virtual-clonedrive.html]()
+A simple wrapper to Slysoft Virtual Clone Drive
 
 ## Features
 
@@ -10,7 +10,7 @@ A simple wrapper to Virtual Clone Drive [http://www.slysoft.com/es/virtual-clone
 
 ## Requirements
 
-Virtual Clone Drive: [http://www.slysoft.com/es/virtual-clonedrive.html]()
+Virtual Clone Drive: [http://www.slysoft.com/virtual-clonedrive.html](http://www.slysoft.com/virtual-clonedrive.html)
 
 Configure UnitLetter and ISOMountPath in app.config file.
 
