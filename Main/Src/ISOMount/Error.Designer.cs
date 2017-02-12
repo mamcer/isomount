@@ -50,10 +50,11 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.AutoSize = true;
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(581, 380);
+            this.btnOk.Location = new System.Drawing.Point(581, 377);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(75, 29);
             this.btnOk.TabIndex = 1;
             this.btnOk.Text = "Ok";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -64,7 +65,7 @@
             this.lnkCopyToClipboard.AutoSize = true;
             this.lnkCopyToClipboard.Location = new System.Drawing.Point(1, 385);
             this.lnkCopyToClipboard.Name = "lnkCopyToClipboard";
-            this.lnkCopyToClipboard.Size = new System.Drawing.Size(99, 13);
+            this.lnkCopyToClipboard.Size = new System.Drawing.Size(118, 19);
             this.lnkCopyToClipboard.TabIndex = 2;
             this.lnkCopyToClipboard.TabStop = true;
             this.lnkCopyToClipboard.Text = "Copy to clipboard";
@@ -72,7 +73,7 @@
             // 
             // Error
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 411);
             this.Controls.Add(this.lnkCopyToClipboard);
