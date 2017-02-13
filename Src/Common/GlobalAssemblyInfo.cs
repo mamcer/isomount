@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Mario Moreno")]
-[assembly: AssemblyProduct("ISO Mount")]
-[assembly: AssemblyCopyright("Copyright © 2013")]
+[assembly: AssemblyProduct("IsoMount")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

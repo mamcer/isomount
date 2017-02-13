@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ISOMount
+namespace IsoMount
 {
     public static class Program
     {

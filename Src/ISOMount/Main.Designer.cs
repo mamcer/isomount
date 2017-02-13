@@ -1,4 +1,4 @@
-﻿namespace ISOMount
+﻿namespace IsoMount
 {
     public partial class Main
     {
@@ -49,10 +49,10 @@
             // 
             this.btnUnmount.AutoSize = true;
             this.btnUnmount.BackColor = System.Drawing.SystemColors.Control;
-            this.btnUnmount.Location = new System.Drawing.Point(147, 11);
+            this.btnUnmount.Location = new System.Drawing.Point(116, 10);
             this.btnUnmount.Margin = new System.Windows.Forms.Padding(2);
             this.btnUnmount.Name = "btnUnmount";
-            this.btnUnmount.Size = new System.Drawing.Size(93, 33);
+            this.btnUnmount.Size = new System.Drawing.Size(95, 33);
             this.btnUnmount.TabIndex = 0;
             this.btnUnmount.Text = "Unmount";
             this.btnUnmount.UseVisualStyleBackColor = false;
@@ -89,9 +89,9 @@
             this.btnMount.Location = new System.Drawing.Point(7, 11);
             this.btnMount.Margin = new System.Windows.Forms.Padding(2);
             this.btnMount.Name = "btnMount";
-            this.btnMount.Size = new System.Drawing.Size(130, 33);
+            this.btnMount.Size = new System.Drawing.Size(95, 33);
             this.btnMount.TabIndex = 3;
-            this.btnMount.Text = "Mount ISO file";
+            this.btnMount.Text = "Mount";
             this.btnMount.UseVisualStyleBackColor = false;
             this.btnMount.Click += new System.EventHandler(this.btnMount_Click);
             // 
@@ -138,7 +138,7 @@
             this.Name = "Main";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ISOMount";
+            this.Text = "IsoMount";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Main_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Main_DragEnter);
             this.ResumeLayout(false);

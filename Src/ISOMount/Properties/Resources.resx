@@ -118,7 +118,7 @@
     <value>This will unmount the current iso file from virtual unit. Yes to continue, No to cancel.</value>
   </data>
   <data name="VCDMountExeNotFound" xml:space="preserve">
-    <value>It seems that you don't have Virtual Clone Drive installed. ISOMount needs that third party tool in order to work. Please download and install it from: http://www.slysoft.com/en/virtual-clonedrive.html</value>
+    <value>It seems that you don't have Virtual Clone Drive installed. IsoMount needs that third party tool in order to work. Please download and install it from: http://www.slysoft.com/en/virtual-clonedrive.html</value>
   </data>
   <data name="NoCDRomUnit" xml:space="preserve">
     <value>There is no CDRom unit configured. Please configure at least one Virtual unit and run ISO Mount again.</value>

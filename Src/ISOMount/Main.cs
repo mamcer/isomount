@@ -1,4 +1,4 @@
-﻿using ISOMount.Properties;
+﻿using IsoMount.Properties;
 using System;
 using System.Configuration;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VirtualDrive;
 
-namespace ISOMount
+namespace IsoMount
 {
     public partial class Main : Form
     {
@@ -16,7 +16,7 @@ namespace ISOMount
             InitializeComponent();
 
             UnitLetter = ConfigurationManager.AppSettings["UnitLetter"];
-            var vcdMountExePath = ConfigurationManager.AppSettings["ISOMountPath"];
+            var vcdMountExePath = ConfigurationManager.AppSettings["IsoMountPath"];
             if (!File.Exists(vcdMountExePath))
             {
                 MessageBox.Show(Resources.VCDMountExeNotFound, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);

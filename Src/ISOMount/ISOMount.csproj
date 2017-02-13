@@ -7,8 +7,8 @@
     <ProjectGuid>{CC7A52BF-1AD5-4B7A-A051-8EEFC6405F4F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ISOMount</RootNamespace>
-    <AssemblyName>ISOMount</AssemblyName>
+    <RootNamespace>IsoMount</RootNamespace>
+    <AssemblyName>IsoMount</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
