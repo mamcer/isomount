@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace VirtualDrive.Test
 {
@@ -43,6 +44,22 @@ namespace VirtualDrive.Test
             Assert.AreEqual(vcdMountPath, wrapper.VcdMountPath);
             Assert.AreEqual(triesBeforeError, wrapper.TriesBeforeError);
             Assert.AreEqual(waitTime, wrapper.WaitTime);
+        }
+
+        [TestMethod]
+        public void UnitLetterSetShouldCallDriveInfoSetDriveLetter()
+        {
+            // Arrange
+            var driveInfo = new Moq.Mock<IDriveInfo>().Object;
+            driveInfo.SetDriveLetter(It.IsAny<string>());
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo);
+
+            // Act
+
+
+            // Assert       
         }
 
         // Arrange

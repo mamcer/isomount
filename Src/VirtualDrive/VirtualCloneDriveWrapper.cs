@@ -12,7 +12,7 @@ namespace VirtualDrive
     {
         private string _unitLetter;
 
-        private IDriveInfo _driveInfo;
+        private readonly IDriveInfo _driveInfo;
 
         public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath) : this(unitLetter, vcdMountPath, 5, 1000, new DefaultDriveInfo())
         {
@@ -56,21 +56,9 @@ namespace VirtualDrive
         /// </summary>
         public int WaitTime { get; set; }
 
-        public string VolumeLabel
-        {
-            get
-            {
-                return _driveInfo != null ? _driveInfo.VolumeLabel : string.Empty;
-            }
-        }
+        public string VolumeLabel => _driveInfo != null ? _driveInfo.VolumeLabel : string.Empty;
 
-        public long TotalSize
-        {
-            get
-            {
-                return _driveInfo != null ? _driveInfo.TotalSize : 0;
-            }
-        }
+        public long TotalSize => _driveInfo?.TotalSize ?? 0;
 
         public async Task<DeviceEventArgs> MountAsync(string isoFilePath)
         {
@@ -97,13 +85,13 @@ namespace VirtualDrive
             }
             catch (Exception ex)
             {
-                return new DeviceEventArgs { HasError = true, ErrorMessage = string.Format("{0} {1}", ex.Message, ex.StackTrace) };
+                return new DeviceEventArgs { HasError = true, ErrorMessage = $"{ex.Message} {ex.StackTrace}"};
             }
         }
 
         private void UnMount()
         {
-            Process.Start(VcdMountPath, string.Format("/l={0} /u", UnitLetter));
+            Process.Start(VcdMountPath, $"/l={UnitLetter} /u");
 
             var i = 0;
             while (_driveInfo.IsReady && i < TriesBeforeError)
@@ -122,10 +110,10 @@ namespace VirtualDrive
         {
             if (!File.Exists(IsoFilePath))
             {
-                throw new Exception(string.Format("File '{0}' doesn't exists or don't have access.", IsoFilePath));
+                throw new Exception($"File '{IsoFilePath}' doesn't exists or don't have access.");
             }
 
-            Process.Start(VcdMountPath, string.Format("/l={0} \"{1}\"", UnitLetter, IsoFilePath));
+            Process.Start(VcdMountPath, $"/l={UnitLetter} \"{IsoFilePath}\"");
 
             var i = 0;
             while (!_driveInfo.IsReady && i < TriesBeforeError)
