@@ -9,18 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Settings.StyleCop = Settings.StyleCop
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISOMount", "ISOMount\ISOMount.csproj", "{CC7A52BF-1AD5-4B7A-A051-8EEFC6405F4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISOMount", "Src\ISOMount\ISOMount.csproj", "{CC7A52BF-1AD5-4B7A-A051-8EEFC6405F4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualDrive", "VirtualDrive\VirtualDrive.csproj", "{7C55AAD9-3508-44FF-B870-7FCC03F1E3AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualDrive", "Src\VirtualDrive\VirtualDrive.csproj", "{7C55AAD9-3508-44FF-B870-7FCC03F1E3AB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{22A39081-62AB-4A96-9F82-41AE16D0DD7F}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualDrive.Test", "VirtualDrive.Test\VirtualDrive.Test.csproj", "{9285C94C-1F02-4BFA-93E8-10BBE7986796}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualDrive.Test", "Src\VirtualDrive.Test\VirtualDrive.Test.csproj", "{9285C94C-1F02-4BFA-93E8-10BBE7986796}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
