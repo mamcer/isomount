@@ -250,3 +250,9 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# coverage report
+coverage-report/
+
+# open cover report file
+open-cover.xml
