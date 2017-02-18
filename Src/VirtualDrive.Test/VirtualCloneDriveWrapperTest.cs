@@ -50,9 +50,8 @@ namespace VirtualDrive.Test
         public void UnitLetterSetShouldCallDriveInfoSetDriveLetter()
         {
             // Arrange
-            var mockDriveInfo = new Moq.Mock<IDriveInfo>();
+            var mockDriveInfo = new Mock<IDriveInfo>();
                 var driveInfo = mockDriveInfo.Object;
-            driveInfo.SetDriveLetter(It.IsAny<string>());
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
             VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo);
@@ -85,16 +84,20 @@ namespace VirtualDrive.Test
         public void VolumeLabelShouldReturnDriveInfoVolumeLabel()
         {
             // Arrange
+            var mockDriveInfo = new Moq.Mock<IDriveInfo>();
+            var label = "Hello";
+            mockDriveInfo.Setup(m => m.VolumeLabel).Returns(label);
+            var driveInfo = mockDriveInfo.Object;
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
-            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null);
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo);
             string volumeLabel;
 
             // Act
             volumeLabel = wrapper.VolumeLabel;
 
             // Assert
-            Assert.AreEqual(string.Empty, volumeLabel);
+            Assert.AreEqual(label, volumeLabel);
         }
 
         // Arrange
