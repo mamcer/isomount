@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,11 +14,13 @@ namespace VirtualDrive
 
         private readonly IFileProvider _fileProvider;
 
-        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath) : this(unitLetter, vcdMountPath, 5, 1000, new DefaultDriveInfo(), new DefaultFileProvider())
+        private readonly IProcessProvider _processProvider;
+
+        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath) : this(unitLetter, vcdMountPath, 5, 1000, new DefaultDriveInfo(), new DefaultFileProvider(), new DefaultProcessProvider())
         {
         }
 
-        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath, int triesBeforeError, int waitTime, IDriveInfo driveInfo, IFileProvider fileProvider)
+        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath, int triesBeforeError, int waitTime, IDriveInfo driveInfo, IFileProvider fileProvider, IProcessProvider processProvider)
         {
             _driveInfo = driveInfo;
 
@@ -32,6 +33,8 @@ namespace VirtualDrive
             VcdMountPath = vcdMountPath;
 
             _fileProvider = fileProvider;
+
+            _processProvider = processProvider;
         }
 
         public string UnitLetter
@@ -98,7 +101,7 @@ namespace VirtualDrive
 
         private void UnMount()
         {
-            Process.Start(VcdMountPath, $"/l={UnitLetter} /u");
+            _processProvider.Start(VcdMountPath, $"/l={UnitLetter} /u");
 
             var i = 0;
             while (_driveInfo.IsReady && i < TriesBeforeError)
@@ -120,7 +123,7 @@ namespace VirtualDrive
                 throw new Exception($"File '{IsoFilePath}' doesn't exists or don't have access.");
             }
 
-            Process.Start(VcdMountPath, $"/l={UnitLetter} \"{IsoFilePath}\"");
+            _processProvider.Start(VcdMountPath, $"/l={UnitLetter} \"{IsoFilePath}\"");
 
             var i = 0;
             while (!_driveInfo.IsReady && i < TriesBeforeError)

@@ -37,7 +37,7 @@ namespace VirtualDrive.Test
             VirtualCloneDriveWrapper wrapper;
 
             // Act
-            wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, triesBeforeError, waitTime, defaultDriveInfo, null);
+            wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, triesBeforeError, waitTime, defaultDriveInfo, null, null);
 
             // Assert       
             Assert.AreEqual(unitLetter, wrapper.UnitLetter);
@@ -54,7 +54,7 @@ namespace VirtualDrive.Test
                 var driveInfo = mockDriveInfo.Object;
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
-            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, null);
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, null, null);
 
             // Act
             wrapper.UnitLetter = "C";
@@ -70,7 +70,7 @@ namespace VirtualDrive.Test
             // Arrange
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
-            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null, null);
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null, null, null);
             string volumeLabel;
 
             // Act
@@ -90,7 +90,7 @@ namespace VirtualDrive.Test
             var driveInfo = mockDriveInfo.Object;
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
-            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, null);
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, null, null);
             string volumeLabel;
 
             // Act
@@ -106,7 +106,7 @@ namespace VirtualDrive.Test
             // Arrange
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
-            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null, null);
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null, null, null);
             long totalSize;
 
             // Act
@@ -126,7 +126,7 @@ namespace VirtualDrive.Test
             var driveInfo = mockDriveInfo.Object;
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
-            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, null);
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, null, null);
             long totalSize;
 
             // Act
