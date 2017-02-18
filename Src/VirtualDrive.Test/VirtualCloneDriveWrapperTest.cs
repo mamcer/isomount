@@ -50,16 +50,19 @@ namespace VirtualDrive.Test
         public void UnitLetterSetShouldCallDriveInfoSetDriveLetter()
         {
             // Arrange
-            var driveInfo = new Moq.Mock<IDriveInfo>().Object;
+            var mockDriveInfo = new Moq.Mock<IDriveInfo>();
+                var driveInfo = mockDriveInfo.Object;
             driveInfo.SetDriveLetter(It.IsAny<string>());
             var unitLetter = @"F:\";
             var vcdMountPath = @"C:\tmp";
             VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo);
 
             // Act
-
+            wrapper.UnitLetter = "C";
 
             // Assert       
+            Assert.AreEqual("C", wrapper.UnitLetter);
+            mockDriveInfo.Verify(m => m.SetDriveLetter(It.IsAny<string>()), Times.Once);
         }
 
         // Arrange
