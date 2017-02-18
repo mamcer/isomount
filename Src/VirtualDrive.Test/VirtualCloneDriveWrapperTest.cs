@@ -181,6 +181,8 @@ namespace VirtualDrive.Test
 
             // Assert
             Assert.IsFalse(deviceEventArgs.HasError);
+            Assert.AreEqual(string.Empty, deviceEventArgs.ErrorMessage);
+            mockProcessProvider.Verify(m => m.Start(It.IsAny<string>(), It.IsAny<string>()), Times.AtLeastOnce);
         }
 
         [TestMethod]
@@ -206,6 +208,56 @@ namespace VirtualDrive.Test
             // Assert
             Assert.IsTrue(deviceEventArgs.HasError);
             Assert.IsTrue(deviceEventArgs.ErrorMessage.Contains("There was an error trying to Mount file on device"));
+        }
+
+        [TestMethod]
+        public async Task UnmountAsyncShouldCallProcessProviderStart()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            var mockDriveInfo = new Mock<IDriveInfo>();
+            var mockFileProvider = new Mock<IFileProvider>();
+            var mockProcessProvider = new Mock<IProcessProvider>();
+
+            mockDriveInfo.Setup(m => m.IsReady).Returns(false);
+            mockProcessProvider.Setup(m => m.Start(It.IsAny<string>(), It.IsAny<string>())).Returns(new System.Diagnostics.Process());
+
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, mockDriveInfo.Object, mockFileProvider.Object, mockProcessProvider.Object);
+            DeviceEventArgs deviceEventArgs;
+
+            // Act
+            deviceEventArgs = await wrapper.UnMountAsync();
+
+            // Assert
+            Assert.IsFalse(deviceEventArgs.HasError);
+            Assert.AreEqual(string.Empty, deviceEventArgs.ErrorMessage);
+            mockProcessProvider.Verify(m => m.Start(It.IsAny<string>(), It.IsAny<string>()), Times.AtLeastOnce);
+        }
+
+        [TestMethod]
+        public async Task UnMountAsyncWithDriveNotReadyShouldReturnError()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            var mockDriveInfo = new Mock<IDriveInfo>();
+            var mockFileProvider = new Mock<IFileProvider>();
+            var mockProcessProvider = new Mock<IProcessProvider>();
+
+            mockDriveInfo.Setup(m => m.IsReady).Returns(true);
+            mockProcessProvider.Setup(m => m.Start(It.IsAny<string>(), It.IsAny<string>())).Returns(new System.Diagnostics.Process());
+
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, mockDriveInfo.Object, mockFileProvider.Object, mockProcessProvider.Object);
+            DeviceEventArgs deviceEventArgs;
+
+            // Act
+            deviceEventArgs = await wrapper.UnMountAsync();
+
+            // Assert
+            Assert.IsTrue(deviceEventArgs.HasError);
+            Assert.IsTrue(deviceEventArgs.ErrorMessage.Contains("There was an error trying to Unmount file on device"));
+            mockProcessProvider.Verify(m => m.Start(It.IsAny<string>(), It.IsAny<string>()), Times.AtLeastOnce);
         }
     }
 }
