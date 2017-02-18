@@ -152,11 +152,60 @@ namespace VirtualDrive.Test
             DeviceEventArgs deviceEventArgs;
 
             // Act
-            deviceEventArgs = await wrapper.MountAsync("");
+            deviceEventArgs = await wrapper.MountAsync(string.Empty);
 
             // Assert
             Assert.IsTrue(deviceEventArgs.HasError);
             Assert.IsTrue(deviceEventArgs.ErrorMessage.Contains("doesn't exists or don't have access."));
+        }
+
+        [TestMethod]
+        public async Task MountAsyncShouldCallProcessProviderStart()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            var mockDriveInfo = new Mock<IDriveInfo>();
+            var mockFileProvider = new Mock<IFileProvider>();
+            var mockProcessProvider = new Mock<IProcessProvider>();
+
+            mockDriveInfo.Setup(m => m.IsReady).Returns(true);
+            mockFileProvider.Setup(m => m.Exists(It.IsAny<string>())).Returns(true);
+            mockProcessProvider.Setup(m => m.Start(It.IsAny<string>(), It.IsAny<string>())).Returns(new System.Diagnostics.Process());
+
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, mockDriveInfo.Object, mockFileProvider.Object, mockProcessProvider.Object);
+            DeviceEventArgs deviceEventArgs;
+
+            // Act
+            deviceEventArgs = await wrapper.MountAsync(@"C:\my-fake-iso.iso");
+
+            // Assert
+            Assert.IsFalse(deviceEventArgs.HasError);
+        }
+
+        [TestMethod]
+        public async Task MountAsyncWithDriveNotReadyShouldReturnError()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            var mockDriveInfo = new Mock<IDriveInfo>();
+            var mockFileProvider = new Mock<IFileProvider>();
+            var mockProcessProvider = new Mock<IProcessProvider>();
+
+            mockDriveInfo.Setup(m => m.IsReady).Returns(false);
+            mockFileProvider.Setup(m => m.Exists(It.IsAny<string>())).Returns(true);
+            mockProcessProvider.Setup(m => m.Start(It.IsAny<string>(), It.IsAny<string>())).Returns(new System.Diagnostics.Process());
+
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, mockDriveInfo.Object, mockFileProvider.Object, mockProcessProvider.Object);
+            DeviceEventArgs deviceEventArgs;
+
+            // Act
+            deviceEventArgs = await wrapper.MountAsync(@"C:\my-fake-iso.iso");
+
+            // Assert
+            Assert.IsTrue(deviceEventArgs.HasError);
+            Assert.IsTrue(deviceEventArgs.ErrorMessage.Contains("There was an error trying to Mount file on device"));
         }
     }
 }
