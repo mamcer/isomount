@@ -38,10 +38,14 @@ namespace VirtualDrive
                 return _unitLetter; 
             }
 
-            set 
-            { 
+            set
+            {
                 _unitLetter = value;
-                _driveInfo.SetDriveLetter(_unitLetter);
+
+                if (_driveInfo != null)
+                {
+                    _driveInfo.SetDriveLetter(_unitLetter);
+                }
             }
         }
 

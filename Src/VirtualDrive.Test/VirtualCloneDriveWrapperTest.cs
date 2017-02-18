@@ -62,7 +62,39 @@ namespace VirtualDrive.Test
 
             // Assert       
             Assert.AreEqual("C", wrapper.UnitLetter);
-            mockDriveInfo.Verify(m => m.SetDriveLetter(It.IsAny<string>()), Times.Once);
+            mockDriveInfo.Verify(m => m.SetDriveLetter(It.IsAny<string>()), Times.AtLeastOnce);
+        }
+
+        [TestMethod]
+        public void VolumeLabelShouldReturnStringEmptyIfDriveInfoIsNull()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null);
+            string volumeLabel;
+
+            // Act
+            volumeLabel = wrapper.VolumeLabel;
+
+            // Assert
+            Assert.AreEqual(string.Empty, volumeLabel);
+        }
+
+        [TestMethod]
+        public void VolumeLabelShouldReturnDriveInfoVolumeLabel()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null);
+            string volumeLabel;
+
+            // Act
+            volumeLabel = wrapper.VolumeLabel;
+
+            // Assert
+            Assert.AreEqual(string.Empty, volumeLabel);
         }
 
         // Arrange
