@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Threading.Tasks;
 
 namespace VirtualDrive.Test
 {
@@ -134,6 +135,28 @@ namespace VirtualDrive.Test
 
             // Assert
             Assert.AreEqual(size, totalSize);
+        }
+
+        [TestMethod]
+        public async Task MountAsyncWithNonExistingIsoShouldReturnError()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            var mockDriveInfo = new Mock<IDriveInfo>();
+            var driveInfo = mockDriveInfo.Object;
+            var mockFileProvider = new Mock<IFileProvider>();
+            mockFileProvider.Setup(m => m.Exists(It.IsAny<string>())).Returns(false);
+
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo, mockFileProvider.Object, null);
+            DeviceEventArgs deviceEventArgs;
+
+            // Act
+            deviceEventArgs = await wrapper.MountAsync("");
+
+            // Assert
+            Assert.IsTrue(deviceEventArgs.HasError);
+            Assert.IsTrue(deviceEventArgs.ErrorMessage.Contains("doesn't exists or don't have access."));
         }
     }
 }
