@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,11 +13,13 @@ namespace VirtualDrive
 
         private readonly IDriveInfo _driveInfo;
 
-        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath) : this(unitLetter, vcdMountPath, 5, 1000, new DefaultDriveInfo())
+        private readonly IFileProvider _fileProvider;
+
+        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath) : this(unitLetter, vcdMountPath, 5, 1000, new DefaultDriveInfo(), new DefaultFileProvider())
         {
         }
 
-        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath, int triesBeforeError, int waitTime, IDriveInfo driveInfo)
+        public VirtualCloneDriveWrapper(string unitLetter, string vcdMountPath, int triesBeforeError, int waitTime, IDriveInfo driveInfo, IFileProvider fileProvider)
         {
             _driveInfo = driveInfo;
 
@@ -29,6 +30,8 @@ namespace VirtualDrive
             WaitTime = waitTime;
 
             VcdMountPath = vcdMountPath;
+
+            _fileProvider = fileProvider;
         }
 
         public string UnitLetter
@@ -112,7 +115,7 @@ namespace VirtualDrive
 
         private void Mount()
         {
-            if (!File.Exists(IsoFilePath))
+            if (!_fileProvider.Exists(IsoFilePath))
             {
                 throw new Exception($"File '{IsoFilePath}' doesn't exists or don't have access.");
             }
