@@ -100,11 +100,40 @@ namespace VirtualDrive.Test
             Assert.AreEqual(label, volumeLabel);
         }
 
-        // Arrange
+        [TestMethod]
+        public void TotalSizeShouldReturnZeroIfDriveInfoIsNull()
+        {
+            // Arrange
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, null);
+            long totalSize;
 
-        // Act
+            // Act
+            totalSize = wrapper.TotalSize;
 
-        // Assert       
+            // Assert
+            Assert.AreEqual(0, totalSize);
+        }
 
+        [TestMethod]
+        public void TotalSizeShouldReturnDriveInfoTotalSize()
+        {
+            // Arrange
+            var mockDriveInfo = new Mock<IDriveInfo>();
+            var size = 100;
+            mockDriveInfo.Setup(m => m.TotalSize).Returns(size);
+            var driveInfo = mockDriveInfo.Object;
+            var unitLetter = @"F:\";
+            var vcdMountPath = @"C:\tmp";
+            VirtualCloneDriveWrapper wrapper = new VirtualCloneDriveWrapper(unitLetter, vcdMountPath, 3, 1000, driveInfo);
+            long totalSize;
+
+            // Act
+            totalSize = wrapper.TotalSize;
+
+            // Assert
+            Assert.AreEqual(size, totalSize);
+        }
     }
 }
